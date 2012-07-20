@@ -1,0 +1,35 @@
+application: romeweblog
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+# https://developers.google.com/appengine/docs/python/config/appconfig
+
+handlers:
+
+- url: /
+  script: unit1_helloudacity.app
+
+- url: /unit2/birthday/.*
+  script: unit2_birthday.app
+
+# rot13
+# signup
+- url: /unit2/.*
+  script: unit2_hw.app
+
+# static files
+# - url: /(.*\.(gif|png|jpg|css|js))
+#   static_files: static/\1
+#   upload: static/(.*\.(gif|png|jpg|css|js))
+
+# 404
+# - url: /.*
+#   script: not_found.py
+
+libraries:
+- name: jinja2
+  version: latest
+- name: webapp2
+  version: "latest"
