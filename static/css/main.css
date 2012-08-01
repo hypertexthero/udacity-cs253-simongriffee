@@ -1,0 +1,59 @@
+
+.login-area {
+    font-size: 13px;
+    color: gray;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.login-link {
+    color: gray;
+    text-decoration: none;
+}
+
+.login-link:visited {
+    color: gray;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+
+.error {
+    color: red;
+}
+
+
+textarea {
+  width: 500px;
+  height: 400px;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+
+.main-title {
+    display: block;
+    color: #222;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 1px solid #aaa;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+}
+
+.post-content {
+    margin-top: 5px;
+}

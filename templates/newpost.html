@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Day Z Log{% endblock %}
+{% block content %}
+<h1>
+  <a href="/blog" class="main-title">
+      {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
+  </a>
+</h1>
+<div id="content">
+    <h2>New Post</h2>
+  <form method="post">
+    <label>
+      <div>subject</div>
+      <input type="text" name="subject" value="{{subject}}">
+    </label>
+    <label>
+      <div>blog</div>
+      <textarea name="content">{{ content }}</textarea>
+    </label>
+    <div class="error">{{ error }}</div>
+    <input type="submit" />
+  </form>
+</div>
+{% endblock %}

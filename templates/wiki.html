@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}CS 253 Wiki{% endblock %}
+{% block content %}
+
+<div class="pull-right">
+  {% if not user %}
+  <a href="/wiki/login">login</a> | <a href="/wiki/signup">signup</a>
+  {% else %}
+    {{ user.username }} (<a href="/wiki/logout">logout</a>)
+  {% endif %}
+</div>
+<h1>
+  <a href="/wiki" class="main-title">
+    CS 253 Wiki
+  </a>
+</h1>
+<div id="content">
+  <h2>All Pages</h2>
+  {% for wiki in wikis %}
+  <div class="wiki">
+    <a href="/wiki{{ wiki.title }}">{{ wiki.title }}</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

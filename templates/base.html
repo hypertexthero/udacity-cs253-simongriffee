@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="/css/custom.css" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% endblock %}
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Day Z Log</a>
+          <div class="pull-right">
+              <div class="nav-collapse">
+                
+
+          {# <div class="btn-group pull-right"> #}
+              {# <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> #}
+              {#     <i class="icon-user"></i>  #}
+                  <ul class="nav">
+                  {% if not user %}
+                    <li><a href="/blog/login">login</a></li>
+                    <li><a href="/blog/signup">signup</a></li>
+                    {% else %}
+                    <li><a href="/blog/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
+                    <li><a href="/blog/newpost">new post</a></li>
+                    <li><a href="/blog/logout">logout</a></li>
+                  {% endif %}
+                  </ul>
+                  
+              {#     <span class="caret"></span> #}
+              {# </a> #}
+              {# <ul class="dropdown-menu"> #}
+              {#     <li><a href="#">Profile</a></li> #}
+              {#     <li class="divider"></li> #}
+              {#     <li><a href="#">Sign Out</a></li> #}
+              {# </ul> #}
+                            </div>
+          </div>
+          
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/wiki">Wiki</a></li>
+              <li><a href="/unit2/rot13">Rot13</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {% block content %}{% endblock %}
+      {% block footer %}{% endblock %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

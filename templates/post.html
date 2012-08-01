@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+{{ post.subject }} - 
+{% if not user %}
+  Day Z Log
+  {% else %}
+  {{ user.username }} - Day Z Log
+  {% endif %}
+{% endblock %}
+
+
+{% block content %}
+<h1>
+  <a href="/blog" class="main-title">
+      {% if not user %}
+            Day Z Log
+            {% else %}
+          {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
+      {% endif %}
+  </a>
+</h1>
+<div id="content">
+  <div class="post">
+    <div class="post-heading">
+      <h2 class="post-title">
+        {{ post.subject }}
+      </h2>
+      <div class="post-date">
+        {{ post.created.strftime("%c") }} by {{ user.username }}
+      </div>
+    </div>
+    <div class="post-content">
+      {{ post.content }}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+  <small>
+    Queried {{ cache_timer }} ago
+  </small>
+</footer>
+{% endblock %}

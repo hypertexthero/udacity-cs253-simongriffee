@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}CS 253 Wiki | History{% endblock %}
+{% block content %}
+
+<div class="pull-right">
+  {% if not user %}
+  <a href="/wiki/login">login</a> | <a href="/wiki/signup">signup</a>
+  {% else %}
+    {{ user.username }} (<a href="/wiki/logout">logout</a>)
+  {% endif %}
+</div>
+<br />
+<div class="pull-right">
+  {% if user %}
+    <a href="/wiki/_edit{{ wikis[0].title }}">edit</a> | 
+    <a href="/wiki{{ wikis[0].title }}">view</a>
+  {% endif %}
+</div>
+<br />
+<div id="content">
+  <h2>{{ wikis[0].title }} - Wiki History</h2>
+  
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>Created</th>
+        <th>Content</th>
+        <th>View</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wiki in wikis %}
+      <tr class="wiki">
+        <td>{{ wiki.version }}</td>
+        <td>{{ wiki.created.strftime("%c") }}</td>
+        <td>{{ wiki.content }}</td>
+        <td><a href="/wiki{{ wiki.title }}?v={{ wiki.version }}">view</a></td>
+        <td><a href="/wiki/_edit{{ wiki.title }}?v={{ wiki.version }}">edit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

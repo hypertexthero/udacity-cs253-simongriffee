@@ -1,5 +1,5 @@
-*.log
-*.pot
 *.pyc
-*.DS_Store
+.DS_Store
 local_settings.py
+.Spotlight-V100
+.Trashes
