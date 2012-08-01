@@ -8,31 +8,23 @@
   {% endif %}
 {% endblock %}
 
+{% block breadcrumbs %} / <a href="/user/{{ user.username }}">{{ user.username|capitalize }}</a> / {{ post.subject }}{% endblock %}
 
 {% block content %}
+<div id="content">
+
 <h1>
-  <a href="/blog" class="main-title">
+  <a href="/" class="main-title">
       {% if not user %}
-            Day Z Log
+            {{ post.subject }} - Day Z Log
             {% else %}
-          {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
+          {{ post.subject }} - <span class="normal">{{ user.username|capitalize }}&rsquo;s Day Z Log</span>
       {% endif %}
   </a>
 </h1>
-<div id="content">
-  <div class="post">
-    <div class="post-heading">
-      <h2 class="post-title">
-        {{ post.subject }}
-      </h2>
-      <div class="post-date">
-        {{ post.created.strftime("%c") }} by {{ user.username }}
-      </div>
-    </div>
-    <div class="post-content">
+
+      {{ post.created.strftime("%c") }} by {{ user.username }}
       {{ post.content }}
-    </div>
-  </div>
 </div>
 {% endblock %}
 

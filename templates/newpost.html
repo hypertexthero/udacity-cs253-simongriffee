@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Day Z Log{% endblock %}
+
+{% block breadcrumbs %} / <a href="/user/{{ user.username }}">{{ user.username|capitalize }}</a> / new story{% endblock %}
+
 {% block content %}
 <h1>
-  <a href="/blog" class="main-title">
+  <a href="/" class="main-title">
       {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
   </a>
 </h1>
 <div id="content">
-    <h2>New Post</h2>
+    <h2>Add a new story</h2>
   <form method="post">
-    <label>
-      <div>subject</div>
+    <label for="subject">
+        Title
       <input type="text" name="subject" value="{{subject}}">
     </label>
-    <label>
-      <div>blog</div>
+    <label for="content">
+        Story
       <textarea name="content">{{ content }}</textarea>
     </label>
     <div class="error">{{ error }}</div>

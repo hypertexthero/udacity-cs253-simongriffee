@@ -106,9 +106,9 @@ class Handler(webapp2.RequestHandler):
     #         if user:
     #             self.render("welcome.html", user=user)
     #         else:
-    #             self.redirect("/blog/signup")
+    #             self.redirect("/register")
     #     else:
-    #         self.redirect("/blog/signup")
+    #         self.redirect("/register")
 
 class MainHandler(Handler):
     def get(self):
@@ -129,9 +129,9 @@ class WelcomeHandler(Handler):
             if user:
                 self.render("welcome.html", user=user)
             else:
-                self.redirect("/blog/signup")
+                self.redirect("/register")
         else:
-            self.redirect("/blog/signup")
+            self.redirect("/register")
         
 
 class BlogHandler(Handler):
@@ -196,7 +196,7 @@ class NewPostHandler(Handler):
             #rerun the query and update the cache
             top_posts(True)
             
-            self.redirect("/blog/%s" % p.key().id())
+            self.redirect("/user/{{user.username/post/%s" % p.key().id())
         else:
             error = "subject and content needed!"
             self.render_newpost(subject, content, error)
@@ -234,4 +234,4 @@ class JSONPostHandler(Handler):
 class FlushHandler(Handler):
     def get(self):
         memcache.flush_all()
-        self.redirect('/blog')
+        self.redirect('/')

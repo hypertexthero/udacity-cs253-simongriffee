@@ -40,12 +40,12 @@
               {#     <i class="icon-user"></i>  #}
                   <ul class="nav">
                   {% if not user %}
-                    <li><a href="/blog/login">login</a></li>
-                    <li><a href="/blog/signup">signup</a></li>
-                    {% else %}
-                    <li><a href="/blog/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
-                    <li><a href="/blog/newpost">new post</a></li>
-                    <li><a href="/blog/logout">logout</a></li>
+                    <li><a href="/login">login</a></li>
+                    <li><a href="/register">register</a></li>
+                    {% else %}   
+                    <li><a href="/user/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
+                    <li><a href="/newpost">new post</a></li>
+                    <li><a href="/logout">logout</a></li>
                   {% endif %}
                   </ul>
                   
@@ -61,15 +61,16 @@
           
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/wiki">Wiki</a></li>
-              <li><a href="/unit2/rot13">Rot13</a></li>
+              {# <li><a href="/">Blog</a></li> #}
+              {# <li><a href="/wiki">Wiki</a></li> #}
+              {# <li><a href="/unit2/rot13">Rot13</a></li> #}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
     <div class="container">
+        <p class="breadcrumb"><a href="/">Home</a> {% block breadcrumbs %}{% endblock %}</p>
       {% block content %}{% endblock %}
       {% block footer %}{% endblock %}
     </div>

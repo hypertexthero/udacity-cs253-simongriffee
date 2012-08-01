@@ -122,7 +122,7 @@ class EditPageHandler(Handler):
                 wiki_page = WikiPage.get_by_id(int(id))
                 self.render_editwiki(user, wiki_page.title, wiki_page.content)
         else:
-            self.redirect("/wiki/signup")
+            self.redirect("/wiki/register")
         
     def post(self, title):
         content = self.request.get("content")
@@ -146,7 +146,7 @@ class EditPageHandler(Handler):
                 error = "content needed!"
                 self.render_editwiki(user, title, content, error)
         else:
-            self.redirect("/wiki/signup")
+            self.redirect("/wiki/register")
 
     
 class HistoryPageHandler(Handler):
@@ -160,7 +160,7 @@ class HistoryPageHandler(Handler):
             else:
                 self.redirect("/wiki/_edit%s" % title)
         else:
-            self.redirect("/wiki/signup")
+            self.redirect("/wiki/register")
         
 
 

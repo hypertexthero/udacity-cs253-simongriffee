@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}CS 253 Wiki | History{% endblock %}
+{% block title %}Day Z Log Wiki | History{% endblock %}
 {% block content %}
 
 <div class="pull-right">
   {% if not user %}
-  <a href="/wiki/login">login</a> | <a href="/wiki/signup">signup</a>
+  <a href="/wiki/login">login</a> | <a href="/wiki/register">register</a>
   {% else %}
     {{ user.username }} (<a href="/wiki/logout">logout</a>)
   {% endif %}

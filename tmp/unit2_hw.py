@@ -38,7 +38,7 @@ class Rot13(BaseHandler):
 		self.render('rot13-form.html', text = rot13)
 
 
-# signup handler
+# register handler
 
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 def valid_username(username):
@@ -52,10 +52,10 @@ EMAIL_RE = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
 def valid_email(email):
 	return not email or EMAIL_RE.match(email)
 
-class Signup(BaseHandler):
+class Register(BaseHandler):
 
 	def get(self):
-		self.render("signup-form.html")
+		self.render("register-form.html")
 
 	def post(self):
 		have_error = False
@@ -83,7 +83,7 @@ class Signup(BaseHandler):
 			have_error = True
 
 		if have_error:
-			self.render('signup-form.html', **params)
+			self.render('register-form.html', **params)
 		else:
 			self.redirect('/unit2/?username=' + username)
 
@@ -95,9 +95,9 @@ class Welcome(BaseHandler):
 		if valid_username(username):
 			self.render('welcome.html', username = username)
 		else:
-			self.redirect('/unit2/signup')
+			self.redirect('/unit2/register')
 
 app = webapp2.WSGIApplication([('/unit2/rot13', Rot13),
-							   ('/unit2/signup', Signup),
+							   ('/unit2/register', Register),
 							   ('/unit2/', Welcome)],
 								debug=True)

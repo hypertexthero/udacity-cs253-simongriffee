@@ -14,10 +14,10 @@ links = [
          "http://prog21.dadgum.com/65.html"),
     Link(23, 62945, 1333894106.0, 351,
          "Learn Haskell Fast and Hard",
-         "http://yannesposito.com/Scratch/en/blog/Haskell-the-Hard-Way/"),
+         "http://yannesposito.com/Scratch/en//Haskell-the-Hard-Way/"),
     Link(2, 6084, 1333996166.0, 81,
          "Announcing Yesod 1.0- a robust, developer friendly, high performance web framework for Haskell",
-         "http://www.yesodweb.com/blog/2012/04/announcing-yesod-1-0"),
+         "http://www.yesodweb.com//2012/04/announcing-yesod-1-0"),
     Link(3, 30305, 1333968061.0, 270,
          "TIL about the Lisp Curse",
          "http://www.winestockwebdesign.com/Essays/Lisp_Curse.html"),
@@ -61,7 +61,7 @@ links = [
          "https://groups.google.com/forum/?fromgroups#!topic/mozilla.dev.planning/Y9v46wFeejA"),
     Link(18, 62443, 1333939389.0, 104,
          "github is making me feel stupid(er)",
-         "http://www.serpentine.com/blog/2012/04/08/github-is-making-me-feel-stupider/"),
+         "http://www.serpentine.com//2012/04/08/github-is-making-me-feel-stupider/"),
     Link(19, 6937, 1333949857.0, 39,
          "BitC Retrospective: The Issues with Type Classes",
          "http://www.bitc-lang.org/pipermail/bitc-dev/2012-April/003315.html"),
@@ -122,4 +122,4 @@ print query()
 
 # result:
 
-# [Link(id=15, submitter_id=62443, submitted_time=1333900877.0, votes=1244, title="Why vector icons don't work", url='http://www.pushing-pixels.org/2011/11/04/about-those-vector-icons.html'), Link(id=18, submitter_id=62443, submitted_time=1333939389.0, votes=104, title='github is making me feel stupid(er)', url='http://www.serpentine.com/blog/2012/04/08/github-is-making-me-feel-stupider/'), Link(id=101, submitter_id=62443, submitted_time=1334018620.0, votes=4, title='research!rsc: Zip Files All The Way Down', url='http://research.swtch.com/zip')]
+# [Link(id=15, submitter_id=62443, submitted_time=1333900877.0, votes=1244, title="Why vector icons don't work", url='http://www.pushing-pixels.org/2011/11/04/about-those-vector-icons.html'), Link(id=18, submitter_id=62443, submitted_time=1333939389.0, votes=104, title='github is making me feel stupid(er)', url='http://www.serpentine.com//2012/04/08/github-is-making-me-feel-stupider/'), Link(id=101, submitter_id=62443, submitted_time=1334018620.0, votes=4, title='research!rsc: Zip Files All The Way Down', url='http://research.swtch.com/zip')]
