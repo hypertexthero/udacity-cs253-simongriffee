@@ -248,7 +248,30 @@ class LogoutHandler(Handler):
         else:
             self.redirect('/')
 
-class UserHandler(Handler):
+# class UserHandler(Handler):
+#     def render_user(self):
+#         user_id = -1
+#         user_id_str = self.request.cookies.get('user_id')
+#         if user_id_str:
+#             cookie_val = check_secure_val(user_id_str)
+#             if cookie_val:
+#                 user_id = int(cookie_val)
+# 
+#         posts, cache_time = top_posts()
+# 
+#         cache_timer = elapsed_time(cache_time)
+# 
+#         if user_id != -1:
+#             user = User.get_by_id(int(user_id))
+#             self.render("user.html", posts=posts, cache_timer=cache_timer, user=user)
+#         else:
+#             self.render("user.html", posts=posts, cache_timer=cache_timer)
+# 
+#     def get(self):
+#         self.render_user()
+
+# http://stackoverflow.com/questions/11653347/adding-usernames-to-the-path-of-the-url
+class ProfileHandler(Handler):
     def render_user(self):
         user_id = -1
         user_id_str = self.request.cookies.get('user_id')
@@ -257,15 +280,11 @@ class UserHandler(Handler):
             if cookie_val:
                 user_id = int(cookie_val)
 
-        posts, cache_time = top_posts()
-
-        cache_timer = elapsed_time(cache_time)
-
         if user_id != -1:
             user = User.get_by_id(int(user_id))
-            self.render("user.html", posts=posts, cache_timer=cache_timer, user=user)
+            self.render("profile.html", user=user)
         else:
-            self.render("user.html", posts=posts, cache_timer=cache_timer)
+            self.render("profile.html")
 
-    def get(self):
+    def get(self, user):
         self.render_user()

@@ -30,7 +30,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Day Z Log</a>
+          
+          {% if not user %}
+            <a class="brand" href="/">Udacity CS253 - Simon Griffee</a>
+            {% else %}
+            <a class="brand" href="/u/{{user.username}}/">{{ user.username|capitalize }}&rsquo;s Udacity CS253 - Simon Griffee</a>
+            {% endif %}
+          
+          
+          
           <div class="pull-right">
               <div class="nav-collapse">
                 
@@ -43,8 +51,8 @@
                     <li><a href="/login">login</a></li>
                     <li><a href="/register">register</a></li>
                     {% else %}   
-                    <li><a href="/user/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
-                    <li><a href="/newpost">new post</a></li>
+                    <li><a href="/u/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
+                    <li><a href="/u/{{user.username}}/newpost">new post</a></li>
                     <li><a href="/logout">logout</a></li>
                   {% endif %}
                   </ul>
@@ -70,7 +78,7 @@
       </div>
     </div>
     <div class="container">
-        <p class="breadcrumb"><a href="/">Home</a> {% block breadcrumbs %}{% endblock %}</p>
+        <p class="breadcrumb"><a href="/">udacity-cs253-simongriffee.appspot.com</a>{% block breadcrumbs %}{% endblock %}</p>
       {% block content %}{% endblock %}
       {% block footer %}{% endblock %}
     </div>

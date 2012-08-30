@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}
 {% if not user %}
-  Day Z Log
+  Udacity CS253 - Simon Griffee
   {% else %}
-  {{ user.username }} - Day Z Log
+  {{ user.username }} - Udacity CS253 - Simon Griffee
   {% endif %}
 {% endblock %}
 
-{% block breadcrumbs %} / <a href="/user/{{ user.username }}">{{ user.username|capitalize }}</a>{% endblock %}
+{% block breadcrumbs %} / <a href="/u/{{ user.username }}">{{ user.username|capitalize }}</a>{% endblock %}
 
 
 {% block content %}
@@ -22,9 +22,9 @@
 <h1>
   <a href="/" class="main-title">
   {% if not user %}
-        Day Z Log
+        Udacity CS253 - Simon Griffee
         {% else %}
-      {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
+      {{ user.username|capitalize }}&rsquo;s <span class="normal">Udacity CS253 - Simon Griffee</span>
   {% endif %}
   </a>
 </h1>
@@ -34,7 +34,7 @@
   <div class="post">
     <div class="post-heading">
       <h2 class="post-title">
-        <a href="/user/{{user.username}}/{{post.key().id()}}">{{post.subject}}</a>
+        <a href="/u/{{user.username}}/{{post.key().id()}}">{{post.subject}}</a>
       </h2>
       <div class="post-date">
         {{ post.created.strftime("%c") }} by {{ user.username }}

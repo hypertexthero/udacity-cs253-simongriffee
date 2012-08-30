@@ -1,4 +1,19 @@
 #!/usr/bin/env python
+#
+# Copyright 2007 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 import os
 import webapp2
@@ -21,7 +36,7 @@ jinja_env= jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), au
 SECRET = 'imsosecret'
 
 # --------------------------------------
-# BLOG FUNCTIONS
+# FUNCTIONS
 # --------------------------------------
 
 def elapsed_time(cache_time):
@@ -92,23 +107,6 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-# =todo: write user handler so we can give user context variable in any page easil
-    # def render_user(self, *a, **kw):
-    #     user_id = -1
-    #     user_id_str = self.request.cookies.get('user_id')
-    #     if user_id_str:
-    #         cookie_val = check_secure_val(user_id_str)
-    #         if cookie_val:
-    #             user_id = int(cookie_val)
-    #                     
-    #     if user_id != -1:
-    #         user = User.get_by_id(int(user_id))
-    #         if user:
-    #             self.render("welcome.html", user=user)
-    #         else:
-    #             self.redirect("/register")
-    #     else:
-    #         self.redirect("/register")
 
 class MainHandler(Handler):
     def get(self):
@@ -129,9 +127,9 @@ class WelcomeHandler(Handler):
             if user:
                 self.render("welcome.html", user=user)
             else:
-                self.redirect("/register")
+                self.redirect("/blog/signup")
         else:
-            self.redirect("/register")
+            self.redirect("/blog/signup")
         
 
 class BlogHandler(Handler):
@@ -165,23 +163,11 @@ class JSONBlogHandler(Handler):
             posts_list.append(create_post_dict(post))
         self.response.headers['Content-Type'] = 'application/json'
         self.write(json.dumps(posts_list))
+    
 
 class NewPostHandler(Handler):
     def render_newpost(self, subject="", content="", error=""):
-        # self.render("newpost.html", subject=subject, content=content, error=error)
-        # trying to get user variable in newpost template
-        user_id = -1
-        user_id_str = self.request.cookies.get('user_id')
-        if user_id_str:
-            cookie_val = check_secure_val(user_id_str)
-            if cookie_val:
-                user_id = int(cookie_val)
-        
-        if user_id != -1:
-            user = User.get_by_id(int(user_id))
-            self.render("newpost.html", subject=subject, content=content, error=error, user=user)
-        else:
-            self.render("newpost.html", subject=subject, content=content, error=error)
+        self.render("newpost.html", subject=subject, content=content, error=error)
     
     def get(self):
         self.render_newpost()
@@ -196,7 +182,7 @@ class NewPostHandler(Handler):
             #rerun the query and update the cache
             top_posts(True)
             
-            self.redirect("/user/{{user.username/post/%s" % p.key().id())
+            self.redirect("/blog/%s" % p.key().id())
         else:
             error = "subject and content needed!"
             self.render_newpost(subject, content, error)
@@ -206,20 +192,8 @@ class PostHandler(Handler):
     def get(self, post_id):
         post, cache_time = single_post(post_id)
         cache_timer = elapsed_time(cache_time)
-        
-        # trying to get user variable in post template
-        user_id = -1
-        user_id_str = self.request.cookies.get('user_id')
-        if user_id_str:
-            cookie_val = check_secure_val(user_id_str)
-            if cookie_val:
-                user_id = int(cookie_val)
-        
-        if user_id != -1:
-            user = User.get_by_id(int(user_id))
-            
         if post:
-            self.render("post.html", post=post, cache_timer=cache_timer, user=user)
+            self.render("post.html", post=post, cache_timer=cache_timer)
         else:
             self.render_post(error="Blog post %s not found!" % post_id)
         
@@ -234,4 +208,4 @@ class JSONPostHandler(Handler):
 class FlushHandler(Handler):
     def get(self):
         memcache.flush_all()
-        self.redirect('/')
+        self.redirect('/blog')

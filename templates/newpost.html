@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Day Z Log{% endblock %}
+{% block title %}Udacity CS253 - Simon Griffee{% endblock %}
 
-{% block breadcrumbs %} / <a href="/user/{{ user.username }}">{{ user.username|capitalize }}</a> / new story{% endblock %}
+{% block breadcrumbs %} / <a href="/u/{{ user.username }}">{{ user.username|capitalize }}</a> / new story{% endblock %}
 
 {% block content %}
 <h1>
   <a href="/" class="main-title">
-      {{ user.username|capitalize }}&rsquo;s <span class="normal">Day Z Log</span>
+      {{ user.username|capitalize }}&rsquo;s <span class="normal">Udacity CS253 - Simon Griffee</span>
   </a>
 </h1>
 <div id="content">
