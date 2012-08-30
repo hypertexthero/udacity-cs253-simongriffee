@@ -1,65 +1,44 @@
 {% extends "base.html" %}
-{% block title %}
-{% if not user %}
-  Udacity CS253 - Simon Griffee
-  {% else %}
-  {{ user.username }} - Udacity CS253 - Simon Griffee
-  {% endif %}
-{% endblock %}
-
-{% block breadcrumbs %} {% if user %}/ <a href="/u/{{ user.username }}">{{ user.username }}</a>{% endif %}{% endblock %}
-
+{% block title %}CS 253 Blog{% endblock %}
 {% block content %}
 
-{# <div class="pull-right"> #}
-{#   {% if not user %} #}
-{#   <a href="/login">login</a> | <a href="/register">register</a> #}
-{#   {% else %} #}
-{#   {{ user.username }} | <a href="/newpost">new post</a> | <a href="/logout">logout</a> #}
-{#   {% endif %} #}
-{# </div> #}
-
-<div id="content">
-
-{% if not user %}
-<div class="hero-unit">
-    <h1><a href="/" class="main-title">Udacity CS253 - Simon Griffee</a></h1>
-    <p>Share your <a href="http://dayzmod.com">Day Z</a> stories on the web. <a class="btn btn-primary btn-large" href="/register">Register</a> for an account, then:
-        <ol>
-            <li>Write your stories on a simple blog using <a href="http://daringfireball.net/projects/markdown/">Markdown</a> format.</li>
-            <li>Generate a <a href="/help">squad.xml file and URL to add to your in-game profile</a> so other players can see who they&rsquo;re dealing with.</li>
-        </ol>
-    
+<div class="pull-right">
+  {% if not user %}
+  <a href="/blog/login">login</a> | <a href="/blog/signup">signup</a>
+  {% else %}
+  {{user.username}} (<a href="/blog/logout">logout</a>)
+  {% endif %}
 </div>
-
-{% else %}
-
-<h1><a href="/" class="main-title">{{ user.username|capitalize }}&rsquo;s <span class="normal">Udacity CS253 - Simon Griffee</span></a>
+<h1>
+  <a href="/blog" class="main-title">
+    CS 253 Blog
+  </a>
+</h1>
+<div id="content">
 
   {% for post in posts %}
   <div class="post">
     <div class="post-heading">
       <h2 class="post-title">
-        <a href="/u/{{user.username}}/{{post.key().id()}}">{{post.subject}}</a>
+        <a href="/blog/{{post.key().id()}}">{{post.subject}}</a>
       </h2>
       <div class="post-date">
-        {{ post.created.strftime("%c") }} by {{ user.username }}
+        {{post.created.strftime("%c")}}
       </div>
     </div>
     <div class="post-content">
-      {{ post.content }}
+      {{post.content}}
     </div>
   </div>
   <br /><br />
   {% endfor %}
-{% endif %}
 </div>
 {% endblock %}
 
 {% block footer %}
 <footer class="footer">
   <small>
-    Queried {{ cache_timer }} ago.
+    Queried {{cache_timer}} ago.
   </small>
 </footer>
 {% endblock %}

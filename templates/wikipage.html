@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Udacity CS253 - Simon Griffee Wiki | {{ wiki_page.title }}{% endblock %}
+{% block title %}CS 253 Wiki | {{ wiki_page.title }}{% endblock %}
 {% block content %}
 <div class="pull-right">
   {% if not user %}
-  <a href="/wiki/login">login</a> | <a href="/wiki/register">register</a>
+  <a href="/wiki/login">login</a> | <a href="/wiki/signup">signup</a>
   {% else %}
-    {{ user.username }} (<a href="/wiki/logout">logout</a>)
+    {{user.username}} (<a href="/wiki/logout">logout</a>)
   {% endif %}
 </div>
 <br />
@@ -18,7 +18,7 @@
 <br />
 <h1>
   <a href="/wiki" class="main-title">
-    Udacity CS253 - Simon Griffee Wiki
+    CS 253 Wiki
   </a>
 </h1>
 <div id="content">

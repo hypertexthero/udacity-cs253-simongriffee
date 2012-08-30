@@ -1,19 +1,4 @@
 #!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
 import os
 import webapp2
@@ -122,7 +107,7 @@ class EditPageHandler(Handler):
                 wiki_page = WikiPage.get_by_id(int(id))
                 self.render_editwiki(user, wiki_page.title, wiki_page.content)
         else:
-            self.redirect("/wiki/register")
+            self.redirect("/wiki/signup")
         
     def post(self, title):
         content = self.request.get("content")
@@ -146,7 +131,7 @@ class EditPageHandler(Handler):
                 error = "content needed!"
                 self.render_editwiki(user, title, content, error)
         else:
-            self.redirect("/wiki/register")
+            self.redirect("/wiki/signup")
 
     
 class HistoryPageHandler(Handler):
@@ -160,7 +145,7 @@ class HistoryPageHandler(Handler):
             else:
                 self.redirect("/wiki/_edit%s" % title)
         else:
-            self.redirect("/wiki/register")
+            self.redirect("/wiki/signup")
         
 
 

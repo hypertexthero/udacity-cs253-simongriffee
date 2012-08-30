@@ -5,5 +5,3 @@ class User(db.Model):
     password = db.StringProperty(required = True)
     email    = db.StringProperty()
     
-    def __str__(self):
-        return self.user

@@ -15,7 +15,6 @@
     </style>
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/css/main.css" />
-    <link type="text/css" rel="stylesheet" href="/css/custom.css" />
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -30,55 +29,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          
-          {% if not user %}
-            <a class="brand" href="/">Udacity CS253 - Simon Griffee</a>
-            {% else %}
-            <a class="brand" href="/u/{{user.username}}/">{{ user.username|capitalize }}&rsquo;s Udacity CS253 - Simon Griffee</a>
-            {% endif %}
-          
-          
-          
-          <div class="pull-right">
-              <div class="nav-collapse">
-                
-
-          {# <div class="btn-group pull-right"> #}
-              {# <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> #}
-              {#     <i class="icon-user"></i>  #}
-                  <ul class="nav">
-                  {% if not user %}
-                    <li><a href="/login">login</a></li>
-                    <li><a href="/register">register</a></li>
-                    {% else %}   
-                    <li><a href="/u/{{user.username}}/profile">{{ user.username }} (profile)</a></li>
-                    <li><a href="/u/{{user.username}}/newpost">new post</a></li>
-                    <li><a href="/logout">logout</a></li>
-                  {% endif %}
-                  </ul>
-                  
-              {#     <span class="caret"></span> #}
-              {# </a> #}
-              {# <ul class="dropdown-menu"> #}
-              {#     <li><a href="#">Profile</a></li> #}
-              {#     <li class="divider"></li> #}
-              {#     <li><a href="#">Sign Out</a></li> #}
-              {# </ul> #}
-                            </div>
-          </div>
-          
+          <a class="brand" href="/">Hello, Udacity!</a>
           <div class="nav-collapse">
             <ul class="nav">
-              {# <li><a href="/">Blog</a></li> #}
-              {# <li><a href="/wiki">Wiki</a></li> #}
-              {# <li><a href="/unit2/rot13">Rot13</a></li> #}
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/wiki">Wiki</a></li>
+              <li><a href="/unit2/rot13">Rot13</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
     <div class="container">
-        <p class="breadcrumb"><a href="/">udacity-cs253-simongriffee.appspot.com</a>{% block breadcrumbs %}{% endblock %}</p>
       {% block content %}{% endblock %}
       {% block footer %}{% endblock %}
     </div>

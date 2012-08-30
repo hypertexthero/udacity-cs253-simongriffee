@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Login - Udacity CS253 - Simon Griffee{% endblock %}
-{% block breadcrumbs %} / login{% endblock %}
+{% block title %}Login{% endblock %}
 {% block content %}
 <h2>Login</h2>
 <form method="post">
@@ -8,7 +7,7 @@
     <tr>
       <td>Username</td>
       <td>
-        <input type="text" name="username" value="{{ username }}">
+        <input type="text" name="username" value="{{username}}">
       </td>
     </tr>
     <tr>
@@ -18,9 +17,8 @@
       </td>
     </tr>
   </table>
-  <p class="error">{{ error }}</p>
+  <p class="error">{{error}}</p>
   <input type="submit">
 </form>
-{# <a href="/{{ request_path }}/register">Register</a> #}
-<a href="/register">Register</a>
+<a href="/{{request_path}}/signup">Signup</a>
 {% endblock %}

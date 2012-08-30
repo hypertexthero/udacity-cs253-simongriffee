@@ -1,36 +1,53 @@
 #!/usr/bin/env python
 
-# Rot13
-
 import os
 import webapp2
 import jinja2
 
-# templating setup
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True) # escape the html entities automatically
+jinja_env= jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
-def render_str(template, **params):
-    t = jinja_env.get_template(template)
-    return t.render(params)
-
-class BaseHandler(webapp2.RequestHandler):
-        
-    def render(self, template, **kw):
-        self.response.out.write(render_str(template, **kw))
-
+class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
+    
+    def render_str(self, template, **params):
+        t = jinja_env.get_template(template)
+        return t.render(params)
+    
+    def render(self, template, **kw):
+        self.write(self.render_str(template, **kw))
 
-class Rot13Handler(BaseHandler):
-	def get(self):
-		self.render('rot13.html')
+def escape_html(s):
+    for (i, o) in (("&", "&amp;"),
+                   ("<", "&lt;"),
+                   (">", "&gt;"),
+                   ('"', "&quot;")):
+        s = s.replace(i, o)
+    return s
 
-	def post(self):
-		rot13 = ''
-		text = self.request.get('text')
-		if text:
-			# python has a built-in rot13 codec - http://docs.python.org/library/codecs.html
-			rot13 = text.encode('rot13')
+def rot13(input):
+    chars = "abcdefghijklmnopqrstuvwxyz"
+    caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    output = ""
+    for i in range(0, len(input)):
+        if input[i] in chars:
+            ind = (chars.index(input[i]) + 13) % 26
+            output = output + chars[ind]
+        elif input[i] in caps:
+            ind = (caps.index(input[i]) + 13) % 26
+            output = output + caps[ind]
+        else:
+            output = output + input[i]
+    return output
 
-		self.render('rot13.html', text = rot13)
+class Rot13Handler(Handler):
+    def render_rot13(self, text=""):
+        self.render("rot.html", text=text)
+    
+    def get(self):
+        self.render_rot13()
+    
+    def post(self):
+        text = rot13(self.request.get('text'))
+        self.render_rot13(escape_html(text))

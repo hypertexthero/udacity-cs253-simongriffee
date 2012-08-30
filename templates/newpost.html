@@ -1,26 +1,23 @@
 {% extends "base.html" %}
-{% block title %}Udacity CS253 - Simon Griffee{% endblock %}
-
-{% block breadcrumbs %} / <a href="/u/{{ user.username }}">{{ user.username|capitalize }}</a> / new story{% endblock %}
-
+{% block title %}CS 253 Blog{% endblock %}
 {% block content %}
 <h1>
-  <a href="/" class="main-title">
-      {{ user.username|capitalize }}&rsquo;s <span class="normal">Udacity CS253 - Simon Griffee</span>
+  <a href="/blog" class="main-title">
+    CS 253 Blog
   </a>
 </h1>
 <div id="content">
-    <h2>Add a new story</h2>
+  <h2>new post</h2>
   <form method="post">
-    <label for="subject">
-        Title
+    <label>
+      <div>subject</div>
       <input type="text" name="subject" value="{{subject}}">
     </label>
-    <label for="content">
-        Story
-      <textarea name="content">{{ content }}</textarea>
+    <label>
+      <div>blog</div>
+      <textarea name="content">{{content}}</textarea>
     </label>
-    <div class="error">{{ error }}</div>
+    <div class="error">{{error}}</div>
     <input type="submit" />
   </form>
 </div>

@@ -23,7 +23,7 @@ EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
 SECRET = 'imsosecret'
 
 # --------------------------------------
-# SESSION FUNCTIONS
+# FUNCTIONS
 # --------------------------------------
 def valid_username(username):
     return USER_RE.match(username)
@@ -68,7 +68,7 @@ def make_salt():
 def make_pw_hash(name, pw, salt = None):
     if not salt:
         salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest() # =todo: use bcrypt - http://www.udacity.com/wiki/CS253%20Unit%204
+    h = hashlib.sha256(name + pw + salt).hexdigest()
     return '%s|%s' % (h, salt)
 
 def valid_pw(name, pw, h):
@@ -88,12 +88,13 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
 
     def render(self, template, **kw):
-        self.write(self.render_str(template, **kw))        
+        self.write(self.render_str(template, **kw))
         
-class RegistrationHandler(Handler):
-    def render_registration(self, username="", email="", error_username="", error_password="",
+        
+class SignupHandler(Handler):
+    def render_signup(self, username="", email="", error_username="", error_password="",
                    error_verify="", error_email="", request_path=""):
-        self.render("registration.html", username=username, email=email, error_username=error_username,
+        self.render("signup.html", username=username, email=email, error_username=error_username,
                     error_password=error_password, error_verify=error_verify, error_email=error_email, 
                     request_path=request_path)
 
@@ -111,10 +112,10 @@ class RegistrationHandler(Handler):
         request_path = l[1]
 
         if user_id == -1:
-            self.render_registration("", "", "", "", "", "", request_path)
+            self.render_signup("", "", "", "", "", "", request_path)
         else:
-            if request_path == '':
-                self.redirect('/welcome')
+            if request_path == 'blog':
+                self.redirect('/blog/welcome')
             elif request_path == 'wiki':
                 self.redirect('/wiki')
             else:
@@ -167,14 +168,14 @@ class RegistrationHandler(Handler):
             user_id = make_secure_val(user_id)
             self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % user_id)
             
-            if request_path == '':
-                self.redirect('/welcome')
+            if request_path == 'blog':
+                self.redirect('/blog/welcome')
             elif request_path == 'wiki':
                 self.redirect('/wiki')
             else:
                 self.redirect('/')
         else:
-            self.render_registration(username, email, error_username, error_password, error_verify, error_email, request_path)
+            self.render_signup(username, email, error_username, error_password, error_verify, error_email, request_path)
 
 
 class LoginHandler(Handler):   
@@ -197,8 +198,8 @@ class LoginHandler(Handler):
         if user_id == -1:
             self.render_login("", "", request_path)
         else:
-            if request_path == '':
-                self.redirect('/welcome')
+            if request_path == 'blog':
+                self.redirect('/blog/welcome')
             elif request_path == 'wiki':
                 self.redirect('/wiki')
             else:
@@ -219,8 +220,8 @@ class LoginHandler(Handler):
                 user_id = str(u[0].key().id())
                 user_id = make_secure_val(user_id)
                 self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % user_id)
-                if request_path == '':
-                    self.redirect('/welcome')
+                if request_path == 'blog':
+                    self.redirect('/blog/welcome')
                 elif request_path == 'wiki':
                     self.redirect('/wiki')
                 else:
@@ -241,50 +242,10 @@ class LogoutHandler(Handler):
             self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
         
         l = re.compile("/").split(self.request.path)
-        if l[1] == '':
-            self.redirect('/register')
+        if l[1] == 'blog':
+            self.redirect('/blog/signup')
         elif l[1] == 'wiki':
-            self.redirect('/wiki/register')
+            self.redirect('/wiki/signup')
         else:
             self.redirect('/')
-
-# class UserHandler(Handler):
-#     def render_user(self):
-#         user_id = -1
-#         user_id_str = self.request.cookies.get('user_id')
-#         if user_id_str:
-#             cookie_val = check_secure_val(user_id_str)
-#             if cookie_val:
-#                 user_id = int(cookie_val)
-# 
-#         posts, cache_time = top_posts()
-# 
-#         cache_timer = elapsed_time(cache_time)
-# 
-#         if user_id != -1:
-#             user = User.get_by_id(int(user_id))
-#             self.render("user.html", posts=posts, cache_timer=cache_timer, user=user)
-#         else:
-#             self.render("user.html", posts=posts, cache_timer=cache_timer)
-# 
-#     def get(self):
-#         self.render_user()
-
-# http://stackoverflow.com/questions/11653347/adding-usernames-to-the-path-of-the-url
-class ProfileHandler(Handler):
-    def render_user(self):
-        user_id = -1
-        user_id_str = self.request.cookies.get('user_id')
-        if user_id_str:
-            cookie_val = check_secure_val(user_id_str)
-            if cookie_val:
-                user_id = int(cookie_val)
-
-        if user_id != -1:
-            user = User.get_by_id(int(user_id))
-            self.render("profile.html", user=user)
-        else:
-            self.render("profile.html")
-
-    def get(self, user):
-        self.render_user()
+        
